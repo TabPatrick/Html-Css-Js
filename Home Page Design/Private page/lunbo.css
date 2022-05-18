@@ -1,0 +1,60 @@
+.t3{
+    width: 100vw;
+    height: 540px;
+    position: absolute;
+}/*让box居中，位置不受浏览器缩放变化*/
+.box{/*lunbo*/
+    border-radius: 20px;
+    margin: 0 auto;
+    width: 980px;/*格式与图片大小一致*/
+    height: 540px;
+    overflow: hidden;/*隐藏超出的部分*/
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+.box > .m{/*B站实例未用list*/
+    display: flex;
+    position: relative;
+    width: 2940px;/*3张图片大小*/
+    height: 540px;
+    top: 0;
+    left: 0;
+    transition: all 0.8s;
+}
+.box > .m > img{
+    width: 980px;
+    height: 540px;
+    transition: all 0.5s;
+}
+.box > .m > img:hover{/*图片悬浮缩放*/
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.box > .btns{
+    margin: 0 auto;
+    width: 980px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: aliceblue;
+}
+
+.box > .btns > div{
+    width: 50px;
+    height: 50px;
+    text-align: center;/*确定按钮格式*/
+    cursor: pointer;
+    font-size: 40px;
+    font-weight: 900;
+    transition: all .3s;
+}
+.box > .btns > div:hover{
+    text-shadow: 0 0 10px white;
+    color: white;
+}
+.box > .btns > div:nth-of-type(1){
+    float: left;
+}
+.box > .btns > div:nth-of-type(2){
+    float: right;
+}
