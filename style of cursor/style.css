@@ -7,7 +7,7 @@ body{
     cursor: url(cursor/正常选择.ico),auto;/*auto代表前面鼠标无法使用时，使用默认鼠标样式*/
 }
 a:hover{
-    cursor: url(cursor/链接选择.ico),auto;/*选用32px的ico，cur，ani，或采用网页链接*/
+    cursor: url(https://raw.githack.com/TabPatrick/Html-Css-Js/main/style%20of%20cursor/cursor/%E9%93%BE%E6%8E%A5%E9%80%89%E6%8B%A9.ico),auto;/*选用32px的ico，cur，ani，或采用网页链接*/
 }
 #cursor {
     position: fixed;
