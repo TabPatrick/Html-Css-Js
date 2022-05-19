@@ -1,0 +1,100 @@
+body
+{
+	margin:0;
+	padding:0;
+	font-family:Poppins;
+}
+.navbar
+{
+	position:fixed;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	flex-direction:row;
+	flex-wrap:wrap;
+	opacity: 0.6;
+	background-color:#d4d7de;
+	width:100%;
+
+	z-index:1;
+}
+.nav
+{
+	display:flex;
+	justify-content:right;
+	list-style:none;
+	margin-right:15%
+}
+.logo
+{
+	flex:1 1 auto;
+	margin-left:10%;
+	text-transform:uppercase;
+	letter-spacing:1px;
+	font-weight:bold;
+	font-size:35px;
+}
+a
+{
+	margin:15px;
+	color:#000;
+	text-decoration:none;
+	text-transform:uppercase
+}
+a:hover
+{color:#000;}
+
+
+/*.banner-area, .about-area, .port-area, .service-area, .contact-area
+{
+	position:relative;
+	display:flex;
+	justify-content:space-around;
+	align-items:center;
+	flex-wrap:wrap;
+	flex-direction:row;
+	width:100%;
+	height:700px;
+}
+.text-part
+{
+	width:65%;
+	height:80%
+}
+h1
+{
+	font-size:50px;
+	font-family:Audiowide;
+}
+
+.about-area, .service-area
+{
+	background:white;
+	
+}
+.port-area, .contact-area
+{
+	background:white;
+	
+})*/
+.container{
+width: 100w;
+height: 100vh;
+	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	
+}
+.container div{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	background-color: var(--c);
+	scroll-snap-align: start;
+}
+p
+{
+	font-size: 100px;
+	color: #fff;
+}
