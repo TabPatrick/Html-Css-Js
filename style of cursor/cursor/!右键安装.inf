@@ -1,0 +1,49 @@
+[Version]
+signature="$CHICAGO$"
+
+[DefaultInstall]
+CopyFiles = Scheme.Cur
+AddReg    = Scheme.Reg
+
+[DestinationDirs]
+Scheme.Cur = 24,"%CUR_DIR%"
+
+[Scheme.Reg]
+HKCU,"Control Panel\Cursors\Schemes","%SCHEME_NAME%",,"%24%\%CUR_DIR%\%pointer%,%24%\%CUR_DIR%\%help%,%24%\%CUR_DIR%\%workback%,%24%\%CUR_DIR%\%busy%,%24%\%CUR_DIR%\%cross%,%24%\%CUR_DIR%\%Text%,%24%\%CUR_DIR%\%handwrt%,%24%\%CUR_DIR%\%unavailiable%,%24%\%CUR_DIR%\%Vert%,%24%\%CUR_DIR%\%Horz%,%24%\%CUR_DIR%\%Dgn1%,%24%\%CUR_DIR%\%Dgn2%,%24%\%CUR_DIR%\%move%,%24%\%CUR_DIR%\%alternate%,%24%\%CUR_DIR%\%link%"
+HKLM,"SOFTWARE\Microsoft\Windows\CurrentVersion\Runonce\Setup\","",,"rundll32.exe shell32.dll,Control_RunDLL main.cpl,,1"
+
+[Scheme.Cur]
+正常选择.cur
+帮助选择.cur
+后台运行.ani
+忙.ani
+文本选择.ani
+不可用.cur
+垂直调整大小.cur
+水平调整大小.cur
+沿对角线调整大小1.cur
+沿对角线调整大小2.cur
+移动.cur
+链接选择.cur
+精确选择.cur
+手写.cur
+候选.ani
+
+[Strings]
+CUR_DIR       = "Windows\Cursors\逃跑的太阳：可莉"
+SCHEME_NAME   = "逃跑的太阳：可莉"
+pointer       = "正常选择.cur"
+help          = "帮助选择.cur"
+workback      = "后台运行.ani"
+busy          = "忙.ani"
+text          = "文本选择.ani"
+unavailiable  = "不可用.cur"
+vert          = "垂直调整大小.cur"
+horz          = "水平调整大小.cur"
+dgn1          = "沿对角线调整大小1.cur"
+dgn2          = "沿对角线调整大小2.cur"
+move          = "移动.cur"
+link          = "链接选择.cur"
+cross         = "精确选择.cur"
+handwrt       = "手写.cur"
+alternate     = "候选.ani"
