@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head -->
+<head>
+    <meta charset="UTF-8">
+    <title>五子棋</title>
+    <!-- css -->
+    <style type="text/css">
+     #container {
+        width: 531px;
+        height: auto;
+        margin: 0 auto;
+        border: 2px solid black;
+        border-radius: 5px;
+        background:url(1.jpg) no-repeat;
+        padding-top: 0px;
+        padding-left: 0px;
+        }
+       td{
+        width: 40px;
+        height:33px;
+        }
+    .menu{
+        position: relative;
+        width: 100%;
+        height: 50px;
+    }
+    .menu>p{
+        font-family: SimSun;
+        font-weight: 600;
+        position: absolute;
+    }
+    .menu>img{
+        position: absolute;
+        margin-left: 20%;
+        bottom: 0px;
+    }
+    .menu>input[name="1"]{
+        margin-left: 30%;
+        bottom: 2px;
+    }
+    .menu>input[name="2"]{
+        margin-left: 50%;
+        bottom: 2px;
+    }
+    .menu>input[name="3"]{
+        margin-left: 70%;
+        bottom: 2px;
+    }
+    input[type="button"]{
+        background-color: white;
+        color: black;
+        font-family: SimSun;
+        border: 1px solid black;
+        border-radius: 2px;
+        position: absolute;
+    }
+    input[type="button"]:hover{
+        cursor: pointer;
+        font-weight: 600;
+        border: 2px solid black;
+        transition: all 0.1s;
+
+    }
+    table{
+        border-collapse: collapse;
+        width: 525px;
+        height: 465px;
+    }
+    .btn{
+        position: absolute;
+        margin-left: 90%;
+    }
+    .btn>input[type="button"]{
+        width: 3vw;
+        height: 3vw;
+        border-radius: 50%;
+    }
+    </style>
+    <!-- css ends -->
+    <!-- script -->
+    <script src="wuzi.js"></script>
+    <!-- script ends -->
+</head>
+<!-- Head Ends -->
+<!-- Body -->
+<body>
+    <div class="btn"><input type="button"value="<" onclick="closeFunction()"></div>
+   <!-- Container -->
+    <div id="container">
+    <!-- table model -->
+     <table>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+        </tr>
+    </table>
+
+   <!-- 控件模块 -->
+   
+   <div class="menu">
+   <p> 当前棋手： </p>
+   <img id="qizi" src="black.png">&nbsp;
+   <input type="button" value="黑棋先行" onclick="status1()" name="1">&nbsp;
+   <input type="button" value="白棋先行" onclick="status2()" name="2">
+   <input type="button" value="再来一局" onclick="window.location.href=window.location" name="3">
+   </div>
+  </div>
+    <!-- Container Ends -->
+</body>
+<!-- Body Ends -->
+</html>

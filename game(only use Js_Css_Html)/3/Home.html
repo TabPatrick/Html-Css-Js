@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>POP STAR</title>
+    <meta charset="utf-8">
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            font-family: Arial;
+        }
+
+        .container {
+            width: 500px;
+            margin: 10px auto;
+            border: 1px solid #aaaaaa;
+            padding: 10px;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 2px 9px;
+            background-color: rgba(58, 135, 173, 0.75);
+            color: #ffffff;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+            white-space: nowrap;
+            vertical-align: baseline;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        .row:after,
+        .box:after {
+            display: table;
+            content: "";
+            line-height: 0;
+            clear: both;
+        }
+
+        .stage,
+        .difficulty,
+        .target {
+            float: left;
+            width: 33.33333333%;
+            padding: 5px 0 15px;
+        }
+
+        .score {
+            text-align: center;
+        }
+
+        .message {
+            height: 30px;
+            line-height: 30px;
+            margin: 15px 0 20px;
+            text-align: center;
+        }
+
+            .message .selected {
+                font-size: 10px;
+                color: #999999;
+            }
+
+            .message .encourage {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+        .box {
+            position: relative;
+        }
+
+            .box div {
+                position: absolute;
+                cursor: pointer;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+            }
+
+        .star-red {
+            background-color: #f72488;
+        }
+
+        .star-green {
+            background-color: #43f31d;
+        }
+
+        .star-blue {
+            background-color: #dd49f0;
+        }
+
+        .star-yellow {
+            background-color: #f9eb21;
+        }
+
+        .star-lightblue {
+            background-color: #4ee3f1;
+        }
+    </style>
+    
+    <script type="text/javascript" src="jquery.js"></script>
+    <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.1.min.js"></script> -->
+    <script>
+        var maps = {
+            xItemCount: 10, // 横排个数
+            yItemCount: 10, // 竖排个数
+            itemMargin: 1,
+            difficulty: 5,  // 难度
+            braveScore: { value: 125, message: 'Brave!' },   // 超过125分，鼓励
+            failedMessage: 'Sorry, you are failed!'
+        }
+        var starClass = [
+            'star-red',
+            'star-blue',
+            'star-yellow',
+            'star-green',
+            'star-lightblue'
+        ];
+
+        $(function () {
+            Array.prototype.exists = function ($item) {
+                var isIn = false;
+                this.forEach(function ($i) {
+                    if ($i.attr('id') === $item.attr('id')) { isIn = true; }
+                });
+                return isIn;
+            };
+
+            var Stage = 0, Target, Score = 0;
+            var $selecteditems = [];
+
+            var $box = $('#box');
+            $box.css({ height: $box[0].clientWidth });
+            var boxWidth = $box[0].clientWidth;
+            var itemWidth = boxWidth / maps.xItemCount - maps.itemMargin * 2;
+
+            var _newStage = function () {
+                $('#stage').html(++Stage);
+                Target = _getTarget(Stage);
+                $('#target').html(Target);
+
+                for (var x = 0; x < maps.xItemCount; ++x) {
+                    for (var y = 0; y < maps.yItemCount; ++y) {
+                        var val = Math.floor(Math.random() * maps.difficulty);
+                        var top = boxWidth - (itemWidth + maps.itemMargin * 2) * (y + 1);
+                        var left = (itemWidth + maps.itemMargin * 2) * x;
+                        $box.append(
+                            $('<div>', { id: x + '_' + y, 'class': starClass[val], css: { top: top, left: left, width: itemWidth, height: itemWidth } })
+                                .data({ x: x, y: y, value: val })
+                                .click(function () {
+                                    var $item = $(this);
+
+                                    if ($selecteditems.length) {
+                                        if ($selecteditems.exists($item)) {
+                                            // 点击的方块在选中的方块列表里面
+                                            _clearSelectItems();
+                                            return;
+                                        } else {
+                                            // 点击的方块不在选中的方块列表里面
+                                            _clearItemStatus();
+                                        }
+                                    }
+
+                                    _selectItems($item);
+                                    _setSelectedItemsStatus();
+                                })
+                        );
+                    }
+                }
+            }
+
+            /* 获取目标分数 */
+            var _getTarget = function (stage) {
+                if (stage === 1) { return 1000; }
+                else if (stage === 2) { return 2500; }
+                else { return (stage - 1) * 2500 }
+            };
+
+            /* 计算得分 */
+            var _getScore = function () {
+                return $selecteditems.length * $selecteditems.length * 5;
+            }
+
+            /* 计算奖励分数 */
+            var _getAdditionalScore = function (count) {
+                if (count >= 10) return 0;
+                else return _getAdditionalScore(count + 1) + (380 - (9 - count) * 40);
+                /* 利用高中数列的计算方法可以得出正确的公式，偷个小懒直接用最简单递归计算得分 */
+            }
+
+            /* 寻找相邻方块 */
+            var _selectItems = function ($item) {
+                $selecteditems.push($item);
+
+                var x = $item.data('x');
+                var y = $item.data('y');
+                var val = $item.data('value');
+
+                if (x - 1 >= 0) {
+                    var $newItem = $('#' + (x - 1) + '_' + y, $box);
+                    if ($newItem.length && $newItem.data('value') === val && !$selecteditems.exists($newItem)) {
+                        _selectItems($newItem);
+                    }
+                }
+                if (x + 1 < maps.xItemCount) {
+                    var $newItem = $('#' + (x + 1) + '_' + y, $box);
+                    if ($newItem.length && $newItem.data('value') === val && !$selecteditems.exists($newItem)) {
+                        _selectItems($newItem);
+                    }
+                }
+                if (y - 1 >= 0) {
+                    var $newItem = $('#' + x + '_' + (y - 1), $box);
+                    if ($newItem.length && $newItem.data('value') === val && !$selecteditems.exists($newItem)) {
+                        _selectItems($newItem);
+                    }
+                }
+                if (y + 1 < maps.yItemCount) {
+                    var $newItem = $('#' + x + '_' + (y + 1), $box);
+                    if ($newItem.length && $newItem.data('value') === val && !$selecteditems.exists($newItem)) {
+                        _selectItems($newItem);
+                    }
+                }
+            }
+
+            /* 设置选中方块状态 */
+            var _setSelectedItemsStatus = function () {
+                if ($selecteditems.length <= 1) {
+                    $selecteditems = [];
+                    $('#message_selected').empty();
+                } else {
+                    $.each($selecteditems, function () {
+                        this.css({ width: itemWidth - 4, height: itemWidth - 4, border: '2px solid #264f78' });
+                    });
+
+                    $('#message_selected').html('个数：' + $selecteditems.length + '，分数：' + _getScore());
+                    $('#message_encourage').empty();
+                }
+            }
+
+            /* 清除方块状态 */
+            var _clearItemStatus = function () {
+                $box.children().css({ width: itemWidth, height: itemWidth, border: 'none' });
+                $selecteditems = [];
+            }
+
+            /* 移除选中方块 */
+            var _clearSelectItems = function () {
+                var score = _getScore();
+                Score += score;
+                $('#score').html(Score);
+                $('#message_selected').empty();
+
+                if (score >= maps.braveScore.value) {
+                    $('#message_encourage').html(maps.braveScore.message);
+
+                    setTimeout(function () {
+                        $('#message_encourage').empty()
+                    }, 2000);
+                }
+
+                $selecteditems.forEach(function ($i) {
+                    $i.fadeOut(0, function () {
+                        $i.remove();
+                    });
+                });
+                $selecteditems = [];
+
+                var setX = 0, setY = 0;
+                for (var x = 0; x < maps.xItemCount; ++x) {
+                    for (var y = 0; y < maps.yItemCount;) {
+                        var $item = $('#' + x + '_' + y, $box);
+
+                        if ($item.length) {
+                            if (x != setX || y != setY) {
+                                var top = boxWidth - (itemWidth + maps.itemMargin * 2) * (setY + 1);
+                                var left = (itemWidth + maps.itemMargin * 2) * setX;
+                                $item
+                                    .attr({ id: setX + '_' + setY })
+                                    .data({ x: setX, y: setY })
+                                    .animate({ top: top, left: left }, 300);
+                            }
+
+                            ++setY;
+                            ++y;
+                            if (setY >= maps.yItemCount || y >= maps.yItemCount) {
+                                ++setX;
+                                setY = 0;
+                            }
+                        } else {
+                            ++y;
+                            if (y >= maps.yItemCount) {
+                                if (setY > 0) {
+                                    ++setX;
+                                }
+                                setY = 0;
+                            }
+                        }
+                    }
+                }
+
+                _checkSingleItems();
+            }
+
+            /* 检查单个的方块 */
+            var _checkSingleItems = function () {
+                var $items = $box.children();
+                var isSingle = true;
+                for (var i = 0, length = $items.length; i < length; ++i) {
+                    _selectItems($($items[i]));
+                    var count = $selecteditems.length;
+                    $selecteditems = [];
+
+                    if (count > 1) {
+                        isSingle = false;
+                        break;
+                    }
+                }
+
+                if (isSingle) {
+                    setTimeout(function () {
+                        var additionalScore = _getAdditionalScore($items.length);
+                        Score += additionalScore;
+                        $('#score').html(Score);
+
+                        if (additionalScore) {
+                            $('#message_encourage').html('Additional Score ' + additionalScore);
+                        }
+
+                        if (Score < Target) {
+                            $('#message_encourage').empty();
+                            $('#message_failed').html(maps.failedMessage);
+                        } else {
+                            setTimeout(function () {
+                                $('#message_encourage').empty()
+                            }, 2000);
+
+                            if ($items.length) {
+                                $items.fadeOut(300, function () {
+                                    $items.remove();
+                                });
+                            }
+
+                            _newStage();
+                        }
+                    }, 500);
+                }
+            }
+
+            $('#difficulty').html(maps.difficulty);
+            $('#score').html(Score);
+            _newStage();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="stage">
+                级数
+                <label id="stage" class="label"></label>
+            </div>
+            <div class="difficulty">
+                难度
+                <label id="difficulty" class="label"></label>
+            </div>
+            <div class="target">
+                目标分数
+                <label id="target" class="label"></label>
+            </div>
+        </div>
+        <div class="score">
+            分数
+            <label id="score" class="label"></label>
+        </div>
+        <div class="message">
+            <label id="message_selected" class="selected"></label>
+            <label id="message_encourage" class="encourage"></label>
+            <label id="message_failed" class="encourage"></label>
+        </div>
+
+        <div id="box" class="box"></div>
+    </div>
+</body>
+</html>
