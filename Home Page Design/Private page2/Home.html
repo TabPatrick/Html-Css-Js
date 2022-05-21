@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Tab Patrick</title>
+		<link rel="shortcut icon" href="ok.png">
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				min-width: 700px;
+				min-height: 400px;
+				font-size: 15px;
+				background: url(background.png) no-repeat center;
+				background-size:cover;
+				width: 100vw;
+				height: 100vh;
+			}
+			.background_png{
+				min-width: 700px;
+				min-height: 400px;
+				position: absolute;
+				z-index: -999;
+				width: 100vw;
+				height: 100vh;
+				background-color: rgba(165, 165, 165, 0.3);
+			}
+			.content{
+				text-align: center;
+				margin: 0 auto;
+				width: 50vw;
+				height: auto;
+				transition: all 0.3s;
+			}
+			.picture{
+				width: 50vw;
+				height: 30vh;
+				margin: 0 auto;
+				
+			}
+			.photograph{
+				width: 100px;
+				height: 100px;
+				margin: 0 auto;
+				border-radius: 50%;
+				border: none;
+				cursor: pointer;
+				background: url('https://i2.hdslb.com/bfs/face/c500646ce95730df4ef96f742b73c814d71ce56f.jpg@240w_240h_1c_1s.webp')no-repeat center;
+				background-size: contain;
+				transition: all 0.3s;
+			}
+			.photograph:hover{
+				transform: scale(1.1);
+				box-shadow: 0 0 10px white;
+			}
+			.sentences{
+				width: 50vw;
+				height: 20vh;
+				margin-top: 10px;
+				color: white;
+			}
+			.p_show{
+				width: 50vw;
+				height:1px;
+				background-color:white;
+			    transition: all 0.3s;
+			}
+			.share{
+				z-index: 999;
+				margin-top: 20vh;
+				width: 50vw;
+				height: 50px;
+			}
+			.share>ul{
+				list-style: none;
+				display: flex;
+				text-align: center;
+				align-items: center;
+				justify-content: center;
+			}
+			.share>ul>li{
+				cursor: pointer;
+				margin-left: 2vw;
+				transition: all 0.3s;
+				border-radius: 50%;
+			}
+			.share>ul>li:hover{
+				transform: scale(0.8);
+				box-shadow: 0 0 0 10px white;
+			}
+			.loader-wrapper{
+			    width: 100vw;
+			    height: 100vh;
+			    display: flex;
+			    justify-content: center;
+			    align-items: center;/*完美居中，弹性布局*/
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    background-color: #7f7bab;/*背景*/
+			    opacity: 1;
+			    transition: all 0.5s;
+			}
+			.loader {
+			    display: inline-block;
+			    width: 30px;
+			    height: 30px;
+			    position: relative;
+			    border: 4px solid white;
+			    animation: loader 2s infinite ease;
+			  }
+			  
+			  .loader-inner {
+			    vertical-align: top;
+			    display: inline-block;
+			    width: 100%;
+			    background-color: white;/*内部颜色*/
+			    animation: loader-inner 2s infinite ease-in;
+			  }
+			  
+			  @keyframes loader {
+			    0% {
+			      transform: rotate(0deg);
+			    }
+			    
+			    25% {
+			      transform: rotate(180deg);
+			    }
+			    
+			    50% {
+			      transform: rotate(180deg);
+			    }
+			    
+			    75% {
+			      transform: rotate(360deg);
+			    }
+			    
+			    100% {
+			      transform: rotate(360deg);
+			    }
+			  }
+			  
+			  @keyframes loader-inner {
+			    0% {
+			      height: 0%;
+			    }
+			    
+			    25% {
+			      height: 0%;
+			    }
+			    
+			    50% {
+			      height: 100%;
+			    }
+			    
+			    75% {
+			      height: 100%;
+			    }
+			    
+			    100% {
+			      height: 0%;
+			    }
+			  }
+			.Pop_Window{
+				width: 600px;
+				height: 300px;
+				top: 50%;
+				left: 50%;
+				margin-left: -300px;
+				margin-top: -150px;
+				display: none;
+				position: absolute;
+				border-radius: 15px;
+				background-color:white;
+				box-shadow: 0 2px 2px grey;
+			}
+			.Window_close{
+				width: 20px;
+				height: 20px;
+				margin-left: 570px;
+				margin-top: 10px;
+				transition: all 0.3s;
+				cursor: pointer;
+				border-radius: 50%;
+			}
+			.Window_close:hover{
+				background-color: red;
+				color: white;
+			}
+			.Window_banner{
+				width: 600px;
+				height: 80px;
+				line-height: 80px;
+				text-align: left;
+				text-indent: 20px;
+				font-family: STHeiti;
+				font-size: 1.2rem;
+				color: dimgray;
+			}
+			.Window_content{
+				font-size: 1.1rem;
+				line-height: 50px;
+				color: dimgray;
+				width: 600px;
+				height: 100px;
+			}
+			.Window_copy{
+				cursor: pointer;
+				line-height: 50px;
+				margin: 0 auto;
+				width: 300px;
+				height: 50px;
+				background-color: #2d86dc;
+				color: white;
+			}
+			.Window_copy:hover{
+				background-color: cornflowerblue;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 加载 -->
+		<div class="loader-wrapper" id="loader">
+			<span class="loader"><span class="loader-inner"></span></span>
+		</div>
+		<!-- 背景 -->
+		<div class="background_png">
+			
+		</div>
+		<!-- 居中控制 -->
+		<div class="content">
+			<!-- 头像栏 -->
+			<div>
+			<div class="picture">
+				
+			</div>
+			<div style="width: 50vw;height: 104px;">
+				<div class="photograph">
+				</div>
+			</div>
+			<!-- 文本栏 -->
+			<div class="sentences">
+				<p style="font-size: 1.4rem;">每一颗大树的成长，要接受阳光，也要包容风雨</p>
+				<div style="height: 50px;"><div class="p_show"></div></div>
+				<p style="font-family: SimHei;font-size: 1.2rem;">欢迎来到 Tab Patrick 的个人主页!</p>
+			</div>
+			<!-- 分享栏 -->
+			<div class="share">
+				<ul>
+					<li>
+						<div onclick="share()" style="width: 50px;height: 50px;background: url('qq.png')no-repeat center;background-size: contain;">
+						</div>
+					</li>
+					<li>
+						<div onclick="share()" style="width: 50px;height: 50px;background: url('qqkj.png')no-repeat center;background-size: contain;">
+						</div>
+					</li>
+					<li>
+						<div onclick="share()" style="width: 50px;height: 50px;background: url('wb.png')no-repeat center;background-size: contain;">
+						</div>
+					</li>
+					
+					<li>
+						<div onclick="share()" style="width: 50px;height: 50px;background: url('bdtb.png')no-repeat center;background-size: contain;">
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="Popup" class="Pop_Window">
+			<div class="Window_close" id="close">X</div>
+			<div class="Window_banner">
+				<p>复制下方链接</p>
+			</div>
+			<div class="Window_content">
+				网页地址：<input type="text" value="#" id="text_c">
+				<textarea id="input" style="opacity: 0;"></textarea>
+			</div>
+			<div class="Window_copy" id="copy_b">复制</div>
+		</div>
+		<script>
+			var state = document.readyState;
+			if(state == 'loading'){
+				var div = document.getElementById('loader');
+				setTimeout("div.style.opacity = 0;",900);
+				setTimeout("div.style.display = 'none';",1500);
+			}
+			function share(){
+				document.getElementById('Popup').style.display = 'block';
+			}
+			document.getElementById('close').onclick = function(){
+				document.getElementById('Popup').style.display = 'none';
+			}
+			document.getElementById('copy_b').onclick = function(){
+				var text = document.getElementById("text_c").value;//获取要复制的内容
+				var textareaC = document.createElement('textarea');//生成元素
+				textareaC.setAttribute('readonly', 'readonly'); //设置只读属性防止手机上弹出软键盘
+				textareaC.value = text;//传值
+				document.body.appendChild(textareaC);//添加为子元素
+				textareaC.select();// 选中文本
+				document.execCommand("copy"); // 执行浏览器复制命令
+				document.body.removeChild(textareaC);//移除
+				if (document.execCommand("copy")) {
+					if(text != ''){
+						alert("复制成功");	
+					}
+					else{
+						alert("复制内容为空");
+					}
+				} else {
+					alert("复制失败");
+				}
+
+			}
+		 </script>
+	</body>
+</html>
