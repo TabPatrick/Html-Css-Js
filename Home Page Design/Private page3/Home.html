@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="shortcut icon" href="https://bkimg.cdn.bcebos.com/pic/a2cc7cd98d1001e987fd8f5ab70e7bec55e797a6?x-bce-process=image/resize,m_lfit,w_220,limit_1/format,f_auto">
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				width: 100vw;
+				height: 100vh;
+				overflow: hidden;
+				background: url('bg.png')no-repeat center;
+				background-size: cover;
+				font-size: 15px;
+				transition:all 0.3s;
+				user-select: none;
+			}
+			.first{
+				position: absolute;
+				width: 100vw;
+				height: 100vh;
+				background-color: rgba(165, 165, 165, 0.3);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.kuang{
+				display: block;
+				position: absolute;
+				width: 130px;
+				height: 130px;
+				border-radius: 50%;
+				background: url('12.png')no-repeat center;
+				background-size: contain;
+				transform: rotate(0deg);
+			}
+			.touxiang{
+				z-index: 999;
+				width: 100px;
+				height: 100px;
+				border-radius: 50%;
+				border: 2px solid white;
+				background: url('https://qlogo1.store.qq.com/qzone/2091595380/2091595380/100?1634137720')no-repeat center;
+				background-size: contain;
+				cursor: pointer;
+				transition: all 0.3s;
+			}
+			.touxiang:hover{
+				box-shadow: 0 0 0 6px white;
+				transform: scale(0.9);
+			}
+			.second{
+				display: none;
+				margin-top: 25vh;
+				width: 100vw;
+				height: 50vh;
+				position: absolute;
+				flex-direction: row;
+				color: white;
+				line-height: 50vh;
+				font-weight: bolder;
+				font-size: 2rem;
+			}
+			.c1{
+				width: 38vw;
+				height: 50vh;
+			}
+			.c2{
+				width: 38vw;
+				height: 50vh;
+				margin-left: auto;
+			}
+			.con{
+				height: 4vh;
+				width: 100vw;
+				position: absolute;
+				bottom: 10vh;
+				text-align: center;
+				color: white;
+				font-size: 1.2rem;
+			}
+			.newcontent{
+				display: none;
+				width: 100vw;
+				height: 100vh;
+				position: absolute;
+				flex-direction: row;
+			}
+			.newcontent>div{
+				margin-left: 20px;
+				height: 100vh;
+			}
+			.left_c{
+				color: white;
+				width: 30vw;
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				justify-content: center;
+				align-items: center;
+			}
+			.left_c>div{
+				margin-top: 10px;
+				transition: all 0.3s;
+			}
+			.left_c>div:hover{
+				border: 1px solid white;
+			}
+			.left_c_1{
+				width: 28vw;
+				height: 20vh;
+				border: none;
+				background-color: rgba(165, 165, 165, 0.3);
+				border-radius: 15px;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				text-align: left;
+			}
+			.left_c_1>div{
+				margin-left: 10px;
+			}
+			.left_c_2{
+				width: 28vw;
+				height: 60vh;
+				border: none;
+				background-color: rgba(165, 165, 165, 0.3);
+				border-radius: 15px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				text-align: left;
+			}
+			.left_c_2>div{
+				width: 22vw;
+				height: 12vh;
+				margin-top: 10px;
+				border-radius: 15px;
+				cursor: pointer;
+				transition: all 0.2s;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-color: rgba(165, 165, 165, 0.3);
+			}
+			.left_c_2>div:hover{
+				border: 2px solid white;
+				transform: scale(1.1);
+			}
+			.center_c{
+				width: 50vw;
+				color: white;
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				justify-content: center;
+				align-items: center;
+				min-width: 600px;
+			}
+			.center_c_c{
+				width: 49vw;
+				min-width: 590px;
+				height: 100vh;
+				border-left: 1px solid white;
+				border-right: 1px solid white;
+				box-shadow: 0 0 1px 2px black;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+			}
+			.center_c_c>div{
+				margin-top: 10px;
+				border-radius: 15px;
+			}
+			.c_banner{
+				width: 40vw;
+				min-width: 500px;
+				height: 20vh;
+				min-height: 100px;
+				border: 1px solid white;
+			}
+			.c_banner>div{
+				width: 40vw;
+				min-width: 500px;
+				height: 20vh;
+				min-height: 100px;
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: center center;
+				transition: all 0.3s;
+				cursor: pointer;
+			}
+			.c_banner>div:hover{
+				transform: scale(0.8);
+			}
+			.c_c{
+				width: 40vw;
+				min-width: 500px;
+				height: 75vh;
+				min-height: 500px;
+				border: 1px solid white;
+				display: flex;
+				flex-direction: column;
+				transition: all 0.3s;
+				text-align: center;
+				justify-content: center;
+				align-items: center;
+			}
+			.gif_c{
+				display: none;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				background: url('load.gif')no-repeat center; 
+				background-size: contain;
+			}
+			.c_c_2{
+				width: 38vw;
+				min-width: 500px;
+				height: 72vh;
+				min-height: 500px;
+				transition: all 0.3s;
+				overflow-y: scroll;
+				justify-content: center;
+				overflow-x:hidden;
+				
+			}
+			.c_c_2>div{
+				margin: 0 auto;
+				margin-top: 10px;
+				width: 37vw;
+				height: 20vw;
+				background-size: 37vw 20vw;
+				transition:all 0.3s;
+				cursor:pointer;
+			}
+			.c_c_2>div:hover{
+				transform:scale(1.1);
+			}
+			.c_c_2::-webkit-scrollbar {
+			    width: 1px;
+			    background:black;
+			    border-radius: 4px;
+			  }
+			
+			 .c_c_2::-webkit-scrollbar-thumb {
+			    background: white;
+			    border-radius: 100%;
+			  }
+
+			.right_c{
+				width: 15vw;
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				align-items: center;
+			}
+			.right_c>#clock{
+				transition: all 0.3s;
+				width: 15vw;
+				height: 10vh;
+				min-width: 60px;
+				color: white;
+				font-size: 3vw;
+				cursor: pointer;
+			}
+			.right_c>#clock:hover{
+				transform: scale(1.1);
+				text-decoration: underline white;
+			}
+			.share{
+				z-index: 1001;
+				cursor: pointer;
+				position: absolute;
+				margin-top: 80vh;
+				width: 3vw;
+				height: 3vw;
+				border: none;
+				border-radius: 50%;
+				background: url('share.png')no-repeat center;
+				background-size: cover;
+				transition: all 0.3s;
+			}
+			.share:hover{
+				box-shadow: 0 0 0 4px white;
+				transform: scale(0.9);
+			}
+			.share_pop{
+				display: none;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				z-index: 1000;
+				background-color: rgba(165, 165, 165, 0.5);
+				opacity: 0;
+			}
+			.s_c{
+				margin: 0 auto;
+				width: 500px;
+				height: 300px;
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				background-color: #464646;
+				border-radius: 15px;
+			}
+			.s_c>div{
+				margin-left: 10px;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				border: 1px solid white;
+				cursor: pointer;
+				transition: all 0.3s;
+			}
+			.s_c>div:hover{
+				box-shadow: 0 0 0 4px white;
+				transform: scale(0.8);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="first" id="f">
+			<div class="kuang" id="dong"></div>
+			<div class="touxiang" id="hov"></div>
+		</div>
+		<div class="second" id="sec">
+			<div class="c1">
+				<div style="position: absolute; left:0;transition: all 0.3s;" id="s1">
+					Click
+				</div>
+			</div>
+			<div class="c2">
+				<div style="position: absolute; right:0;transition: all 0.3s;" id="s2">
+					Me
+				</div>
+			</div>
+		</div>
+		<div class="con" id="co">
+			<p style="font-family: '宋体';">天不生我大伟少，万古剑道如长夜。</p><br>
+			<p style="text-decoration: underline white;font-size: 0.5rem;">@大爱仙尊</p>
+		</div>
+		<div class="newcontent" id="new">
+			<div class="left_c">
+				<div class="left_c_1">
+					<div class="touxiang" style="width: 6vw;height: 6vw;"></div>
+					<div style="width: 9vw;font-size: 1.3rem;text-align: right;" id="to_1">
+						<p>昵称：</p>
+						<p>性别：</p>
+						<p>签名：</p>
+					</div>
+					<div style="width: 10vw;font-size: 1.3rem;text-align: left;" id="to_2">
+						<p>大爱仙尊</p>
+						<p>无</p>
+						<p>你在狗叫什么！</p>
+					</div>
+				</div>
+				<div class="left_c_2">
+					<div onclick="show_game(1)" style="background-image: url('https://www.res.ren3.pandadastudio.com/_nuxt/img/logo%E2%80%8B%E2%80%8B%E2%80%8B.1f11750.png');"></div>
+					<div onclick="show_game(2)" style="background-image: url('https://webstatic.mihoyo.com/upload/event/2022/04/29/f3ae19253c652c344f1b0a504c0e88a4_8241534878326003995.png');"></div>
+					<div onclick="show_game(3)" style="background-image: url('https://www.bh3.com/_nuxt/img/loading-logo.f0c3ebe.png');"></div>
+					<div onclick="show_game(4)" style="background-image: url('https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/1617773200235-37F2RZTI6FCZ7Q2C27L0/logo_main.png?format=1000w');"></div>
+				</div>
+			</div>
+			<div class="center_c">
+				<div class="center_c_c" id="inner_html">
+					<div class="c_banner"><div id="tttt"style="background-image: url('https://www.res.ren3.pandadastudio.com/_nuxt/img/logo%E2%80%8B%E2%80%8B%E2%80%8B.1f11750.png');"></div></div>
+					<div class="c_c">
+						<div id="gif" class="gif_c"></div>
+						<div id="c_c_c" class="c_c_2">
+							<div style="background-image:url('http://www.res.ren3.pandadastudio.com/upload/rzbxs/20220426/fdcd33c4d5014b175e8f7c145a21d394.jpg')"></div>
+							<div style="background-image:url('http://www.res.ren3.pandadastudio.com/upload/rzbxs/20220411/6ed724756ebd1892281cab8013a890b2.jpg')"></div>
+							<div style="background-image:url('http://www.res.ren3.pandadastudio.com/upload/rzbxs/20220328/5b5b2df1022f3ac59ae52a352f1c7714.jpg')"></div>
+							<div style="background-image:url('http://www.res.ren3.pandadastudio.com/upload/rzbxs/20211220/6db4d09bd9d52dbee1b4567ab213cd1a.jpg')"></div>
+				
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="right_c">
+				<div id="clock"></div>
+				<script src="clock.js"></script>
+				<div class="share" id="share"></div>
+			</div>
+		</div>
+		<div class="share_pop" id="share_p">
+			<p style="color: white;">点击以下图标复制网址</p>
+			<div class="s_c">
+				<div onclick="share_link()" style="background: url('qq.png')no-repeat center; background-size: contain;"></div>
+				<div onclick="share_link()" style="background: url('qqkj.png')no-repeat center; background-size: contain;"></div>
+				<div onclick="share_link()" style="background: url('wb.png')no-repeat center; background-size: contain;"></div>
+				<div onclick="share_link()" style="background: url('bdtb.png')no-repeat center; background-size: contain;"></div>
+			</div>
+		</div>
+	</body>
+	<script>
+		function danchu(){
+			if (document.getElementById('share_p').style.opacity >= 0) {
+				if(document.getElementById('share_p').style.opacity>=1){
+					document.getElementById('share_p').style.opacity = 1;
+				}
+				else
+				{
+					document.getElementById('share_p').style.opacity = Number(document.getElementById('share_p').style.opacity) + 0.02;
+					setTimeout("danchu()",1);
+				}
+			}
+		}
+		var i = 0;
+		var j = 1;
+		var state_c = 0;
+		setInterval(function(){
+			document.getElementById('dong').style.transform = 'rotate('+i+'deg)';
+			if(i>=360)
+			{
+				i = 0;
+			}
+			else
+			{
+				i+=1;
+			}
+		},10);
+		function loadH(){
+			document.getElementById('new').style.display = 'flex';
+		}
+		document.getElementById('hov').onmouseover = function(){
+			document.getElementById('sec').style.display = 'flex';
+			document.getElementById('s1').style.opacity = 1;
+			document.getElementById('s2').style.opacity = 1;
+			setTimeout(function(){
+				document.getElementById('s1').style.left = 35+'vw';
+				document.getElementById('s2').style.right = 35+'vw';
+			},10);
+		}
+		document.getElementById('hov').onmouseleave = function(){
+			document.getElementById('s1').style.opacity = 0;
+			document.getElementById('s2').style.opacity = 0;
+			setTimeout(function(){
+				document.getElementById('s1').style.left = 0;
+				document.getElementById('s2').style.right = 0;
+				document.getElementById('sec').style.display = 'none';
+			},100);
+		}
+		document.getElementById('hov').onclick = function(){
+			document.getElementById('hov').style.transform = 'scale(1.2)';
+			document.getElementById('s1').style.fontSize = 1.5 + 'rem';
+			document.getElementById('s2').style.fontSize = 1.5 + 'rem';
+			setTimeout(function(){
+				document.getElementById('dong').style.display = 'none';
+				document.getElementById('hov').style.display = 'none';
+				document.getElementById('sec').style.display = 'none';
+				document.getElementById('co').style.display = 'none';
+				loadH();
+			},700);
+		}
+		document.getElementById('share').onclick = function(){
+			if(state_c == 0)
+			{
+				document.getElementById('share_p').style.display = 'flex';
+				danchu();
+				document.getElementById('share').style.background = "url('close.png')no-repeat center";
+				state_c = 1;
+			}
+			else
+			{
+				document.getElementById('share_p').style.opacity = 0;
+				document.getElementById('share_p').style.display = 'none';
+				document.getElementById('share').style.background = "url('share.png')no-repeat center";
+				state_c = 0;
+			}
+		}
+		 function share_link(){
+				var text = "仙路尽头谁为峰，一见伟少道成空。";//获取要复制的内容
+				var textareaC = document.createElement('textarea');//生成元素
+				textareaC.setAttribute('readonly', 'readonly'); //设置只读属性防止手机上弹出软键盘
+				textareaC.value = text;//传值
+				document.body.appendChild(textareaC);//添加为子元素
+				textareaC.select();// 选中文本
+				document.execCommand("copy"); // 执行浏览器复制命令
+				document.body.removeChild(textareaC);//移除
+				if (document.execCommand("copy")) {
+					if(text != ''){
+						alert("复制成功");	
+					}
+					else{
+						alert("复制内容为空");
+					}
+				} else {
+					alert("复制失败");
+				}
+
+			}
+		function add_img(id){
+			let tmmp = document.getElementById('c_c_c');
+			tmmp.innerHTML = '';
+			var newDiv1 = document.createElement("div");//创建div
+			var newDiv2 = document.createElement("div");//创建div
+			var newDiv3 = document.createElement("div");//创建div
+			var newDiv4 = document.createElement("div");//创建div
+			switch(id){
+				case 1:
+					newDiv1.style.backgroundImage = "url('http://www.res.ren3.pandadastudio.com/upload/rzbxs/20220426/fdcd33c4d5014b175e8f7c145a21d394.jpg')";
+					newDiv2.style.backgroundImage = "url('http://www.res.ren3.pandadastudio.com/upload/rzbxs/20220411/6ed724756ebd1892281cab8013a890b2.jpg')";
+					newDiv3.style.backgroundImage = "url('http://www.res.ren3.pandadastudio.com/upload/rzbxs/20220328/5b5b2df1022f3ac59ae52a352f1c7714.jpg')";
+					newDiv4.style.backgroundImage = "url('http://www.res.ren3.pandadastudio.com/upload/rzbxs/20211220/6db4d09bd9d52dbee1b4567ab213cd1a.jpg')";
+					tmmp.appendChild(newDiv1);
+					tmmp.appendChild(newDiv2);
+					tmmp.appendChild(newDiv3);
+					tmmp.appendChild(newDiv4);
+					break;
+				case 2:
+					newDiv1.style.backgroundImage = "url('https://upload-bbs.mihoyo.com/upload/2022/05/06/315021072/09d9d9d88f4087278e60287c4b104451_2271273661315348047.png')";
+					newDiv2.style.backgroundImage = "url('https://upload-bbs.mihoyo.com/upload/2022/04/28/75379477/49a70aa553d3742de497f1cbbc13d59d_7114159831007483894.jpg')";
+					newDiv3.style.backgroundImage = "url('https://upload-bbs.mihoyo.com/upload/2022/05/03/315021072/7ce8b0080c378fa804f8092fc13c3d82_6993737333759645266.png')";
+					newDiv4.style.backgroundImage = "url('https://upload-bbs.mihoyo.com/upload/2022/05/03/315021072/89ee51ecfe13ce350f6dd6999ecae2ea_970291744518169263.png')";
+					tmmp.appendChild(newDiv1);
+					tmmp.appendChild(newDiv2);
+					tmmp.appendChild(newDiv3);
+					tmmp.appendChild(newDiv4);
+					break;
+				case 3:
+					newDiv1.style.backgroundImage = "url('https://webstatic.mihoyo.com/upload/contentweb/2022/04/20/aa7fdd276ad848d02f28f7f86264d386_4205942631348108574.jpg')";
+					newDiv2.style.backgroundImage = "url('https://webstatic.mihoyo.com/upload/contentweb/2022/04/12/344975ce9aa0b0000c844fc9f5b9bfcd_1027365475789183759.png')";
+					newDiv3.style.backgroundImage = "url('https://uploadstatic.mihoyo.com/contentweb/20220126/2022012620363380030.png')";
+					newDiv4.style.backgroundImage = "url('https://uploadstatic.mihoyo.com/contentweb/20211214/2021121420492421280.png')";
+					tmmp.appendChild(newDiv1);
+					tmmp.appendChild(newDiv2);
+					tmmp.appendChild(newDiv3);
+					tmmp.appendChild(newDiv4);
+					break;
+				case 4:
+					newDiv1.style.backgroundImage = "url('https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/64008652-cc73-42e3-a001-b65f33c0471b/white+palace.jpg?format=1000w')";
+					newDiv2.style.backgroundImage = "url('https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/6cdafaab-e95a-49c7-a045-4f21469bb327/Blue_Cave.jpg?format=1000w')";
+					newDiv3.style.backgroundImage = "url('https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/aae3d1c6-1590-4b86-a56b-e8efcc543b6b/Paintmaster.jpg?format=1000w')";
+					newDiv4.style.backgroundImage = "url('https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/3d24e1c8-d368-4b05-bb5f-00888e238d12/Grimm.jpg?format=1000w')";
+					tmmp.appendChild(newDiv1);
+					tmmp.appendChild(newDiv2);
+					tmmp.appendChild(newDiv3);
+					tmmp.appendChild(newDiv4);
+					break;
+			}
+		}
+		function show_game(id){
+			let html = document.getElementById('tttt');
+			document.getElementById('c_c_c').style.display = 'none';
+			document.getElementById('gif').style.display = 'block';
+			switch(id){
+				case 1:add_img(1);html.style.backgroundImage = "url('https://www.res.ren3.pandadastudio.com/_nuxt/img/logo%E2%80%8B%E2%80%8B%E2%80%8B.1f11750.png')";break;
+				case 2:add_img(2);html.style.backgroundImage = "url('https://webstatic.mihoyo.com/upload/event/2022/04/29/f3ae19253c652c344f1b0a504c0e88a4_8241534878326003995.png')";break;
+				case 3:add_img(3);html.style.backgroundImage = "url('https://www.bh3.com/_nuxt/img/loading-logo.f0c3ebe.png')";break;
+				case 4:add_img(4);html.style.backgroundImage = "url('https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/1617773200235-37F2RZTI6FCZ7Q2C27L0/logo_main.png?format=1000w')";break;
+			}
+			setTimeout(function(){
+				document.getElementById('gif').style.display = 'none';
+				document.getElementById('c_c_c').style.display = 'block';
+				document.getElementById('c_c_c').scrollTo(0,0);
+			},500);
+			
+		}
+	</script>
+</html>
